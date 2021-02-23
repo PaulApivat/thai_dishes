@@ -15,7 +15,16 @@
 # Code and Libraries Used
 
 - Beautiful Soup (Python)
+- Requests: HTTP for Humans (Python)
+- urllib: URL Handling modules (Python)
+- ssl: Wrapper for socket objects (Python)
+- Pandas (Python)
 - Tidyverse (R)
+- readr
+- dplyr
+- ggplot2
+
+**Scraper Article**: https://sateesh110.medium.com/how-to-scrape-wikipedia-table-using-python-beautiful-soup-cd0d8ee1a319
 
 # Documenting Progress
 
@@ -26,7 +35,13 @@
 
 ## Web Scraping
 
-- Beautiful Soup library in Python
+Tweaked web scraper article to scrape 16 tables from Wikipedia.com. We scraped over 300 Thai dishes. For each dish, we got:
+
+- Thai name
+- Thai script
+- English name
+- Region
+- Description
 
 ## Data Cleaning
 
