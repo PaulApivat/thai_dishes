@@ -45,7 +45,11 @@ Tweaked web scraper article to scrape 16 tables from Wikipedia.com. We scraped o
 
 ## Data Cleaning
 
-- R
+After scraping data, I transformed them into data frames in _Pandas_ before porting over to R. I made the following changes:
+
+- Changing column names (snake case)
+- Remove newline escape sequence (\n)
+- _note_: Discovered that hyperlinked text in the Description column did not get scrapped. Must redo.
 
 # EDA
 
