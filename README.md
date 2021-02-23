@@ -17,6 +17,11 @@
 - Beautiful Soup (Python)
 - Tidyverse (R)
 
+# Documenting Progress
+
+- Project walk through
+- Daily progress
+
 # Getting Data
 
 ## Web Scraping
@@ -25,10 +30,18 @@
 
 ## Data Cleaning
 
+- R
+
 # EDA
+
+## Visualizations
 
 # Analysis
 
+- TBD
+
 # Results
+
+- TBD
 
 ## Presentation / Productionization
