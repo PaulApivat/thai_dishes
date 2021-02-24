@@ -629,7 +629,8 @@ for row in all_tables[15].findAll('tr'):
         p3.append(cells[2].find(text=True))
         p4.append(cells[3].find(text=True))
         p5.append(cells[4].find(text=True))
-        p6.append(cells[5].find(text=True).rstrip())  # ignore italics
+        # p6 is a list of list, needs flattening
+        p6.append([string for string in cells[5].strings])
 
 # create dictionary
 p_d = dict([(x, 0) for x in header])
@@ -640,7 +641,7 @@ p_d['Thai script'] = p2
 p_d['English name'] = p3
 p_d['Image'] = p4
 p_d['Region'] = p5
-p_d['Description'] = p6
+p_d['Description'] = p6  # needs flattening p6
 
 # turn dict into dataframe
 p_d_df_table = pd.DataFrame(p_d)
