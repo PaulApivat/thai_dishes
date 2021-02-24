@@ -42,6 +42,10 @@ Tweaked web scraper article to scrape 16 tables from Wikipedia.com. We scraped o
 - English name
 - Region
 - Description
+- Description2\*
+
+After discovering that the hyper-linked text in the Description column did not get scrapped, I created an empty column ('Description2'), then set it
+to a list comprehension where I looped through each row (a list) and joined the strings in each list. A by product is _not_ having to flatten the column of lists.
 
 ## Data Cleaning
 
@@ -49,7 +53,7 @@ After scraping data, I transformed them into data frames in _Pandas_ before port
 
 - Changing column names (snake case)
 - Remove newline escape sequence (\n)
-- _note_: Discovered that hyperlinked text in the Description column did not get scrapped. Must redo.
+- _note_: Discovered that hyper-linked text in the Description column did not get scrapped. Must redo. `Done`
 
 # EDA
 
