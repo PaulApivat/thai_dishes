@@ -59,7 +59,7 @@ for row in all_tables[0].findAll('tr'):
         a3.append(cells[2].find(text=True))
         a4.append(cells[3].find(text=True))
         a5.append(cells[4].find(text=True))
-        a6.append(cells[5].find(text=True).rstrip())  # ignore italics
+        a6.append([string for string in cells[5].strings])  # needs flattening
 
 # create dictionary
 a_d = dict([(x, 0) for x in header])
@@ -97,7 +97,7 @@ for row in all_tables[1].findAll('tr'):
         b3.append(cells[2].find(text=True))
         b4.append(cells[3].find(text=True))
         b5.append(cells[4].find(text=True))
-        b6.append(cells[5].find(text=True).rstrip())  # ignore italics
+        b6.append([string for string in cells[5].strings])  # needs flattening
 
 # create dictionary
 b_d = dict([(x, 0) for x in header])
@@ -135,7 +135,7 @@ for row in all_tables[2].findAll('tr'):
         c3.append(cells[2].find(text=True))
         c4.append(cells[3].find(text=True))
         c5.append(cells[4].find(text=True))
-        c6.append(cells[5].find(text=True).rstrip())  # ignore italics
+        c6.append([string for string in cells[5].strings])  # needs flattening
 
 # create dictionary
 c_d = dict([(x, 0) for x in header])
@@ -173,7 +173,7 @@ for row in all_tables[3].findAll('tr'):
         d3.append(cells[2].find(text=True))
         d4.append(cells[3].find(text=True))
         d5.append(cells[4].find(text=True))
-        d6.append(cells[5].find(text=True).rstrip())  # ignore italics
+        d6.append([string for string in cells[5].strings])  # needs flattening
 
 # create dictionary
 d_d = dict([(x, 0) for x in header])
@@ -211,7 +211,7 @@ for row in all_tables[4].findAll('tr'):
         e3.append(cells[2].find(text=True))
         e4.append(cells[3].find(text=True))
         e5.append(cells[4].find(text=True))
-        e6.append(cells[5].find(text=True).rstrip())  # ignore italics
+        e6.append([string for string in cells[5].strings])  # needs flattening
 
 # create dictionary
 e_d = dict([(x, 0) for x in header])
@@ -249,7 +249,7 @@ for row in all_tables[5].findAll('tr'):
         f3.append(cells[2].find(text=True))
         f4.append(cells[3].find(text=True))
         f5.append(cells[4].find(text=True))
-        f6.append(cells[5].find(text=True).rstrip())  # ignore italics
+        f6.append([string for string in cells[5].strings])  # needs flattening
 
 # create dictionary
 f_d = dict([(x, 0) for x in header])
@@ -287,7 +287,7 @@ for row in all_tables[6].findAll('tr'):
         g3.append(cells[2].find(text=True))
         g4.append(cells[3].find(text=True))
         g5.append(cells[4].find(text=True))
-        g6.append(cells[5].find(text=True).rstrip())  # ignore italics
+        g6.append([string for string in cells[5].strings])  # needs flattening
 
 # create dictionary
 g_d = dict([(x, 0) for x in header])
@@ -325,7 +325,7 @@ for row in all_tables[7].findAll('tr'):
         h3.append(cells[2].find(text=True))
         h4.append(cells[3].find(text=True))
         h5.append(cells[4].find(text=True))
-        h6.append(cells[5].find(text=True).rstrip())  # ignore italics
+        h6.append([string for string in cells[5].strings])  # needs flattening
 
 # create dictionary
 h_d = dict([(x, 0) for x in header])
@@ -363,7 +363,7 @@ for row in all_tables[8].findAll('tr'):
         i3.append(cells[2].find(text=True))
         i4.append(cells[3].find(text=True))
         i5.append(cells[4].find(text=True))
-        i6.append(cells[5].find(text=True).rstrip())  # ignore italics
+        i6.append([string for string in cells[5].strings])  # needs flattening
 
 # create dictionary
 i_d = dict([(x, 0) for x in header])
@@ -401,7 +401,7 @@ for row in all_tables[9].findAll('tr'):
         j3.append(cells[2].find(text=True))
         j4.append(cells[3].find(text=True))
         j5.append(cells[4].find(text=True))
-        j6.append(cells[5].find(text=True).rstrip())  # ignore italics
+        j6.append([string for string in cells[5].strings])  # needs flattening
 
 # create dictionary
 j_d = dict([(x, 0) for x in header])
@@ -439,7 +439,7 @@ for row in all_tables[10].findAll('tr'):
         k3.append(cells[2].find(text=True))
         k4.append(cells[3].find(text=True))
         k5.append(cells[4].find(text=True))
-        k6.append(cells[5].find(text=True).rstrip())  # ignore italics
+        k6.append([string for string in cells[5].strings])  # needs flattening
 
 # create dictionary
 k_d = dict([(x, 0) for x in header])
@@ -477,7 +477,7 @@ for row in all_tables[11].findAll('tr'):
         l3.append(cells[2].find(text=True))
         l4.append(cells[3].find(text=True))
         l5.append(cells[4].find(text=True))
-        l6.append(cells[5].find(text=True).rstrip())  # ignore italics
+        l6.append([string for string in cells[5].strings])  # needs flattening
 
 # create dictionary
 l_d = dict([(x, 0) for x in header])
@@ -515,7 +515,7 @@ for row in all_tables[12].findAll('tr'):
         m3.append(cells[2].find(text=True))
         m4.append(cells[3].find(text=True))
         m5.append(cells[4].find(text=True))
-        m6.append(cells[5].find(text=True).rstrip())  # ignore italics
+        m6.append([string for string in cells[5].strings])  # needs flattening
 
 # create dictionary
 m_d = dict([(x, 0) for x in header])
@@ -553,7 +553,7 @@ for row in all_tables[13].findAll('tr'):
         n3.append(cells[2].find(text=True))
         n4.append(cells[3].find(text=True))
         n5.append(cells[4].find(text=True))
-        n6.append(cells[5].find(text=True).rstrip())  # ignore italics
+        n6.append([string for string in cells[5].strings])  # needs flattening
 
 # create dictionary
 n_d = dict([(x, 0) for x in header])
@@ -591,7 +591,7 @@ for row in all_tables[14].findAll('tr'):
         o3.append(cells[2].find(text=True))
         o4.append(cells[3].find(text=True))
         o5.append(cells[4].find(text=True))
-        o6.append(cells[5].find(text=True).rstrip())  # ignore italics
+        o6.append([string for string in cells[5].strings])  # needs flattening
 
 # create dictionary
 o_d = dict([(x, 0) for x in header])
