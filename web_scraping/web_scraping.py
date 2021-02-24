@@ -669,6 +669,22 @@ thai_dishes = pd.concat([a_d_df_table,
                          o_d_df_table,
                          p_d_df_table])
 
+# Need to Flatten last column ('Description')
+thai_dishes['Description']
+
+# Create a new column (just in case)
+thai_dishes['Description2'] = ""
+
+# First combine all text for each list in thai_dishes['Description']
+for cell in thai_dishes['Description']:
+    print(' '.join(cell))
+
+# join all words in the list for each of 328 rows and set to thai_dishes['Description2'] column
+# automatically flatten the list
+thai_dishes['Description2'] = [
+    ' '.join(cell) for cell in thai_dishes['Description']]
+
+
 # Explore data frame with pandas
 thai_dishes.columns
 thai_dishes.dtypes
