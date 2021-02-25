@@ -3,7 +3,7 @@
 ## Motivation
 
 - What is this project?
-- What drives this project?
+- What drives this project? People need to know they have other choices aside from Pad Thai.
 - What questions are you answering?
 
 ## Initial Scope
@@ -30,6 +30,8 @@
 
 - Project walk through
 - Daily progress
+- 2/24 - web scraping (Description)
+- 2/25 - data cleaning & transformatino
 
 # Getting Data
 
@@ -53,6 +55,7 @@ After scraping data, I transformed them into data frames in _Pandas_ before port
 
 - Changing column names (snake case)
 - Remove newline escape sequence (\n)
+- Add/Mutate new columns: major_groupings (individual, shared, savory, sweet, drinks)
 - _note_: Discovered that hyper-linked text in the Description column did not get scrapped. Must redo. `Done`
 
 # EDA
