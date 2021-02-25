@@ -1,16 +1,16 @@
 library(tidyverse)
 
-# load data
+# load data ----
 df <- read_csv("thai_dishes.csv")
 
 str(df)
 
 
 
-# exploratory
+# exploratory ----
 df %>% str()
 
-# change column name
+# change column name ----
 df <- df %>%
     rename(
         Thai_name = `Thai name`,
@@ -32,7 +32,7 @@ df %>%
 df %>%
     count(`Thai_name`)
 
-# remove  \n from all columns
+# remove  \n from all columns ----
 df$Thai_name <- gsub("[\n]", "", df$Thai_name)
 df$Thai_script <- gsub("[\n]", "", df$Thai_script)
 df$English_name <- gsub("[\n]", "", df$English_name)
@@ -45,7 +45,9 @@ df$Image
 df$Region
 df$Description2
 
-# Count by individual words in Thai_name column
+# Count individual words ----
+
+# Count by individual words in Thai_name column [English works better]
 df %>%
     separate_rows(Thai_name, sep = ' ') %>%
     group_by(Thai_name = tolower(Thai_name)) %>%
@@ -69,6 +71,18 @@ df %>%
     tally(sort = TRUE) 
 
 
+# Add Columns to Account for Individual vs Shared, Savoury, Sweet or Drinks ----
+df <- df %>%
+    mutate(
+        major_grouping = as.character(NA),
+        )
+    
+# 1-53: Individual Dishes
+df[1:53,]$major_grouping <- 'Individual dishes'
+df[54:254,]$major_grouping <- 'Shared dishes'
+df[255:280,]$major_grouping <- 'Savory snacks'
+df[281:311,]$major_grouping <- 'Sweet snacks'
+df[312:328,]$major_grouping <- 'Drinks'
 
 
 
