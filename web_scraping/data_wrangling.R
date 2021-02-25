@@ -71,13 +71,13 @@ df %>%
     tally(sort = TRUE) 
 
 
-# Add Columns to Account for Individual vs Shared, Savoury, Sweet or Drinks ----
+# Add Major Grouping ----
 df <- df %>%
     mutate(
         major_grouping = as.character(NA),
         )
     
-# 1-53: Individual Dishes
+# Account for Individual vs Shared, Savoury, Sweet or Drinks
 df[1:53,]$major_grouping <- 'Individual dishes'
 df[54:254,]$major_grouping <- 'Shared dishes'
 df[255:280,]$major_grouping <- 'Savory snacks'
