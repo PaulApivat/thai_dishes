@@ -71,10 +71,11 @@ df %>%
     tally(sort = TRUE) 
 
 
-# Add Major Grouping ----
+# Add Major AND Minor Groupings ----
 df <- df %>%
     mutate(
         major_grouping = as.character(NA),
+        minor_grouping = as.character(NA)
         )
     
 # Account for Individual vs Shared, Savoury, Sweet or Drinks
@@ -83,6 +84,26 @@ df[54:254,]$major_grouping <- 'Shared dishes'
 df[255:280,]$major_grouping <- 'Savory snacks'
 df[281:311,]$major_grouping <- 'Sweet snacks'
 df[312:328,]$major_grouping <- 'Drinks'
+
+# Account for Minor grouping
+df[1:22,]$minor_grouping <- 'Rice dishes'
+df[23:46,]$minor_grouping <- 'Noodle dishes'
+df[47:53,]$minor_grouping <- 'Misc Indiv'
+df[54:93,]$minor_grouping <- 'Curries'
+df[94:104,]$minor_grouping <- 'Soups'
+df[105:156,]$minor_grouping <- 'Salads'
+df[157:190,]$minor_grouping <- 'Fried and stir-fried dishes'    #need to change #157 to Kai phat khing
+df[191:209,]$minor_grouping <- 'Deep-fried dishes'
+df[210:228,]$minor_grouping <- 'Grilled dishes'
+df[229:232,]$minor_grouping <- 'Steamed or blanched dishes'
+df[233,]$minor_grouping <- 'Stewed dishes'
+df[234:249,]$minor_grouping <- 'Dipping sauces and pastes'   # need Editing
+df[250:254,]$minor_grouping <- 'Misc Shared'
+df[255:280,]$minor_grouping <- 'Savory snacks'
+df[281:311,]$minor_grouping <- 'Sweet snacks'
+df[312:328,]$minor_grouping <- 'Drinks'
+
+
 
 
 
