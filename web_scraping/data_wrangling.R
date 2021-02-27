@@ -92,7 +92,7 @@ df[47:53,]$minor_grouping <- 'Misc Indiv'
 df[54:93,]$minor_grouping <- 'Curries'
 df[94:104,]$minor_grouping <- 'Soups'
 df[105:156,]$minor_grouping <- 'Salads'
-df[157:190,]$minor_grouping <- 'Fried and stir-fried dishes'    #need to change #157 to Kai phat khing
+df[157:190,]$minor_grouping <- 'Fried and stir-fried dishes'    #need to change #157 to Kai phat khing [done]
 df[191:209,]$minor_grouping <- 'Deep-fried dishes'
 df[210:228,]$minor_grouping <- 'Grilled dishes'
 df[229:232,]$minor_grouping <- 'Steamed or blanched dishes'
@@ -103,6 +103,36 @@ df[255:280,]$minor_grouping <- 'Savory snacks'
 df[281:311,]$minor_grouping <- 'Sweet snacks'
 df[312:328,]$minor_grouping <- 'Drinks'
 
+
+# Edit Rows for missing Thai_name
+df[26,]$Thai_name <- "Khanom chin nam ngiao"
+
+df[110,]$Thai_name <- "Lap Lanna"
+
+df[157,]$Thai_name <- "Kai phat khing"
+
+df[234,]$Thai_name <- "Nam chim chaeo"
+df[235,]$Thai_name <- "Nam chim kai"
+df[236,]$Thai_name <- "Nam chim paesa"
+df[237,]$Thai_name <- "Nam chim sate"
+df[238,]$Thai_name <- "Nam phrik i-ke"
+df[240,]$Thai_name <- "Nam phrik kha"
+df[241,]$Thai_name <- "Nam phrik khaep mu"
+df[246,]$Thai_name <- "Nam phrik pla chi"
+
+
+
+# Write new csv to save edits made to data frame
+write_csv(df, "edit_thai_dishes.csv")
+
+
+
+# Dendrogram
+library(ggraph)
+library(igraph)
+
+df %>%
+    select(major_grouping, minor_grouping, Thai_name, Thai_script)
 
 
 
