@@ -258,7 +258,7 @@ ggraph(shared_dishes_graph, layout = "dendrogram", circular = TRUE) +
     coord_flip()
 
 
-
+geom_node_tex
 
 ## NOTE ##
 ## Web-Scrapping Process need to get text from links [DONE]

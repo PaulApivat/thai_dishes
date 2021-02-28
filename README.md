@@ -75,7 +75,13 @@ After scraping data, I transformed them into data frames in _Pandas_ before port
 
 - Changing column names (snake case)
 - Remove newline escape sequence (\n)
-- Add/Mutate new columns: major_groupings (individual, shared, savory, sweet, drinks)
+- Add/Mutate new columns:
+- major_groupings (individual, shared, savory, sweet, drinks)
+- minor_groupings (rice, noodles, curries, soups, salads, grilled etc.)
+- Edit rows for missing data in Thai_name column: 26, 110, 157, 234-238, 240, 241, 246
+
+- save to "edit_thai_dishes.csv"
+
 - _note_: Discovered that hyper-linked text in the Description column did not get scrapped. Must redo. `Done`
 
 # EDA
