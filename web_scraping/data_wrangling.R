@@ -203,12 +203,39 @@ d4 <- df %>%
 
 edges2 <- rbind(d3, d4)
 
+# create a vertices data.frame. One line per object of hierarchy
+vertices = data.frame(
+    name = unique(c(as.character(edges2$from), as.character(edges2$to)))
+)
+
+# add column with group of each name. Useful to later color points
+vertices$group = edges2$from[ match(vertices$name, edges2$to)]
+
+# Add information concerning the label we are going to add: angle, horizontal adjustment and potential flip
+# calculate the ANGLE of the labels
+vertices$id=NA
+myleaves=which(is.na(match(vertices$name, edges2$from)))
+nleaves=length(myleaves)
+vertices$id[myleaves] = seq(1:nleaves)
+vertices$angle = 90 - (360 * vertices$id / nleaves)
+
+
+
+# calculate the alignment of labels: right or left
+# If I am on the left part of the plot, my labels have currently an angle < -90
+vertices$hjust<-ifelse( vertices$angle < -90, 1, 0)
+
+# flip angle BY to make them readable
+vertices$angle<-ifelse(vertices$angle < -90, vertices$angle+180, vertices$angle)
+
+
 # plot dendrogram (shared dishes)
 shared_dishes_graph <- graph_from_data_frame(edges2)
 
 ggraph(shared_dishes_graph, layout = "dendrogram", circular = TRUE) +
     geom_edge_diagonal(aes(edge_colour = edges2$from), label_dodge = NULL) +
     #geom_node_text(aes(label = name, filter = leaf, color = 'blue'), hjust = 1.1, size = 3) +
+    geom_node_text(aes(x = x*1.15, y=y*1.15, filter = leaf, label=name, angle = vertices$angle, hjust= vertices$hjust, colour= vertices$group), size=2.7, alpha=1) +
     geom_node_point(color = "whitesmoke") +
     theme(
         plot.background = element_rect(fill = '#343d46'),
@@ -224,10 +251,13 @@ ggraph(shared_dishes_graph, layout = "dendrogram", circular = TRUE) +
         caption = 'Data: Wikipedia | Graphic: @paulapivat'
     ) +
     expand_limits(x = c(-1.5, 1.5), y = c(-0.8, 0.8)) +
-    coord_flip()
+    coord_flip() 
 
 
-
+ggraph(shared_dishes_graph, layout = 'dendrogram', circular = TRUE) +
+    geom_edge_elbow() +
+    coord_fixed() +
+    geom_node_text(aes(label = name, filter = leaf, color = 'blue'), hjust = 1.1, size = 3)
 
 
 ## NOTE ##
