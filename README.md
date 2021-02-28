@@ -8,7 +8,7 @@
 
 ## Initial Scope
 
-- Phase 1: Scrape the Thai Dishes table from wikipedia. Clean the data. Run exploratory analysis to get some insights. Use Python for web scraping, R for data wrangling and visualization.
+- Phase 1: Scrape the Thai Dishes table from [Wikipedia](https://en.wikipedia.org/wiki/List_of_Thai_dishes). Clean the data. Run exploratory analysis to get some insights. Use Python for web scraping, R for data wrangling and visualization.
 
 - Next: Potentially use Text Analysis
 
@@ -35,6 +35,8 @@
 **Scraper Article**: https://sateesh110.medium.com/how-to-scrape-wikipedia-table-using-python-beautiful-soup-cd0d8ee1a319
 
 **Circular Dendrogram Labels**: [Dendrograms in R, a lightweight approach](https://atrebas.github.io/post/2019-06-08-lightweight-dendrograms/) this helped me figure out the angles for geom_node_text
+
+**Wikipedia: Thai Dishes**: https://en.wikipedia.org/wiki/List_of_Thai_dishes
 
 # Documenting Progress
 
