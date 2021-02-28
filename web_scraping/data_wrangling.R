@@ -127,13 +127,57 @@ write_csv(df, "edit_thai_dishes.csv")
 
 
 
-# Dendrogram
+# Dendrogram ----
 library(ggraph)
 library(igraph)
 
 df %>%
-    select(major_grouping, minor_grouping, Thai_name, Thai_script)
+    select(major_grouping, minor_grouping, Thai_name, Thai_script) %>%
+    filter(major_grouping == 'Individual dishes') %>%
+    group_by(minor_grouping) %>%
+    count() 
 
+# Individual Dishes ----
+
+# data: edge list
+d1 <- data.frame(from="Individual dishes", to=c("Misc Indiv", "Noodle dishes", "Rice dishes"))
+
+d2 <- df %>%
+    select(minor_grouping, Thai_name) %>%
+    slice(1:53) %>%
+    rename(
+        from = minor_grouping,
+        to = Thai_name
+    ) 
+
+edges <- rbind(d1, d2)
+
+# plot dendrogram
+indiv_dishes_graph <- graph_from_data_frame(edges)
+
+ggraph(indiv_dishes_graph, layout = "dendrogram", circular = FALSE) +
+    geom_edge_diagonal(aes(edge_colour = edges$from), label_dodge = NULL) +
+    geom_node_text(aes(label = name, filter = leaf, color = 'red'), hjust = 1.1, size = 3) +
+    geom_node_point(color = "whitesmoke") +
+    theme(
+        plot.background = element_rect(fill = '#343d46'),
+        panel.background = element_rect(fill = '#343d46'),
+        legend.position = 'none',
+        plot.title = element_text(colour = 'whitesmoke', face = 'bold', size = 25),
+        plot.subtitle = element_text(colour = 'whitesmoke', face = 'bold'),
+        plot.caption = element_text(color = 'whitesmoke', face = 'italic')
+    ) +
+    labs(
+        title = '52 Alternatives to Pad Thai',
+        subtitle = 'Individual Thai Dishes',
+        caption = 'Data: Wikipedia | Graphic: @paulapivat'
+    ) +
+    expand_limits(x = c(-1.5, 1.5), y = c(-0.8, 0.8)) +
+    coord_flip() +
+    annotate("text", x = 47, y = 1, label = "Miscellaneous (7)", color = "#7CAE00")+
+    annotate("text", x = 31, y = 1, label = "Noodle Dishes (24)", color = "#00C08B") +
+    annotate("text", x = 8, y = 1, label = "Rice Dishes (22)", color = "#C77CFF") +
+    annotate("text", x = 26, y = 2, label = "Individual\nDishes", color = "#F8766D")
 
 
 
