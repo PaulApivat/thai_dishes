@@ -152,7 +152,7 @@ d2 <- df %>%
 
 edges <- rbind(d1, d2)
 
-# plot dendrogram (nidividual dishes)
+# plot dendrogram (idividual dishes)
 indiv_dishes_graph <- graph_from_data_frame(edges)
 
 ggraph(indiv_dishes_graph, layout = "dendrogram", circular = FALSE) +
@@ -250,7 +250,7 @@ ggraph(shared_dishes_graph, layout = "dendrogram", circular = TRUE) +
     ) +
     labs(
         title = 'Thai Food is Best Shared',
-        subtitle = 'Shared Thai Dishes',
+        subtitle = '201 Dishes for Sharing',
         caption = 'Data: Wikipedia | Graphic: @paulapivat'
     ) +
     #expand_limits(x = c(-1.5, 1.5), y = c(-0.8, 0.8)) +
