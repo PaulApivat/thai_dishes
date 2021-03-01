@@ -240,17 +240,19 @@ ggraph(shared_dishes_graph, layout = "dendrogram", circular = TRUE) +
     geom_edge_diagonal(aes(edge_colour = edges2$from), label_dodge = NULL) +
     geom_node_text(aes(x = x*1.15, y=y*1.15, filter = leaf, label=name, angle = vertices$angle, hjust= vertices$hjust, colour= vertices$group), size=2.7, alpha=1) +
     geom_node_point(color = "whitesmoke") +
+    #scale_color_manual(values = c("red", "orange", "blue", "yellow", "green", "purple", "dodgerblue", "black", "pink", "white")) +
+    #scale_edge_color_manual(values = c("red", "orange", "blue", "yellow", "green", "purple", "dodgerblue", "black", "pink", "white", "white")) +
     theme(
         plot.background = element_rect(fill = '#343d46'),
         panel.background = element_rect(fill = '#343d46'),
         legend.position = 'none',
         plot.title = element_text(colour = 'whitesmoke', face = 'bold', size = 25),
-        plot.subtitle = element_text(colour = 'whitesmoke', face = 'bold', margin = margin(0,0,30,0)),
+        plot.subtitle = element_text(colour = 'whitesmoke', margin = margin(0,0,30,0), size = 20),
         plot.caption = element_text(color = 'whitesmoke', face = 'italic')
     ) +
     labs(
         title = 'Thai Food is Best Shared',
-        subtitle = '201 Dishes for Sharing',
+        subtitle = '201 Dishes',
         caption = 'Data: Wikipedia | Graphic: @paulapivat'
     ) +
     #expand_limits(x = c(-1.5, 1.5), y = c(-0.8, 0.8)) +
