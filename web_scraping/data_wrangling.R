@@ -1,6 +1,8 @@
 library(tidyverse)
 
 # load data ----
+### NOTE: read in edit_thai_dishes.csv and skip to DENDROGRAM
+
 df <- read_csv("thai_dishes.csv")
 
 str(df)
@@ -128,6 +130,8 @@ write_csv(df, "edit_thai_dishes.csv")
 
 
 # Dendrogram ----
+
+### NOTE: read in edit_thai_dishes.csv
 library(ggraph)
 library(igraph)
 
@@ -270,9 +274,6 @@ ggraph(shared_dishes_graph, layout = "dendrogram", circular = TRUE) +
     
     
     
-geom_node_tex
 
-## NOTE ##
-## Web-Scrapping Process need to get text from links [DONE]
 
 
