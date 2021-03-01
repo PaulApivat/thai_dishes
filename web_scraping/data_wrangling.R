@@ -245,7 +245,7 @@ ggraph(shared_dishes_graph, layout = "dendrogram", circular = TRUE) +
         panel.background = element_rect(fill = '#343d46'),
         legend.position = 'none',
         plot.title = element_text(colour = 'whitesmoke', face = 'bold', size = 25),
-        plot.subtitle = element_text(colour = 'whitesmoke', face = 'bold'),
+        plot.subtitle = element_text(colour = 'whitesmoke', face = 'bold', margin = margin(0,0,30,0)),
         plot.caption = element_text(color = 'whitesmoke', face = 'italic')
     ) +
     labs(
@@ -255,9 +255,18 @@ ggraph(shared_dishes_graph, layout = "dendrogram", circular = TRUE) +
     ) +
     #expand_limits(x = c(-1.5, 1.5), y = c(-0.8, 0.8)) +
     expand_limits(x = c(-1.5, 1.5), y = c(-1.5, 1.5)) +
-    coord_flip()
-
-
+    coord_flip() +
+    annotate("text", x = 0.2, y = 0.5, label = "Grilled", color = "#00BA38") +
+    annotate("text", x = -0.2, y = 0.5, label = "Deep-Fried", color = "#DE8C00") +
+    annotate("text", x = -0.4, y = 0.1, label = "Fried &\n Stir-Fried", color = "#7CAE00") +
+    annotate("text", x = -0.3, y = -0.4, label = "Salads", color = "#00B4F0") +
+    annotate("text", x = -0.05, y = -0.5, label = "Soups", color = "#C77CFF") +
+    annotate("text", x = 0.3, y = -0.5, label = "Curries", color = "#F8766D") +
+    annotate("text", x = 0.5, y = -0.1, label = "Misc", color = "#00BFC4") +
+    annotate("text", x = 0.5, y = 0.1, label = "Sauces\nPastes", color = "#B79F00")
+    
+    
+    
 geom_node_tex
 
 ## NOTE ##
