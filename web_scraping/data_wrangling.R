@@ -252,7 +252,7 @@ ggraph(shared_dishes_graph, layout = "dendrogram", circular = TRUE) +
     ) +
     labs(
         title = 'Thai Food is Best Shared',
-        subtitle = '201 Dishes',
+        subtitle = '201 Ways to Make Friends',
         caption = 'Data: Wikipedia | Graphic: @paulapivat'
     ) +
     #expand_limits(x = c(-1.5, 1.5), y = c(-0.8, 0.8)) +
