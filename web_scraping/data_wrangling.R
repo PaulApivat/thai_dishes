@@ -256,6 +256,7 @@ ggraph(shared_dishes_graph, layout = "dendrogram", circular = TRUE) +
     #expand_limits(x = c(-1.5, 1.5), y = c(-0.8, 0.8)) +
     expand_limits(x = c(-1.5, 1.5), y = c(-1.5, 1.5)) +
     coord_flip() +
+    annotate("text", x = 0.4, y = 0.45, label = "Steamed", color = "#F564E3") +
     annotate("text", x = 0.2, y = 0.5, label = "Grilled", color = "#00BA38") +
     annotate("text", x = -0.2, y = 0.5, label = "Deep-Fried", color = "#DE8C00") +
     annotate("text", x = -0.4, y = 0.1, label = "Fried &\n Stir-Fried", color = "#7CAE00") +
