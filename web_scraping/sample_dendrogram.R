@@ -47,7 +47,7 @@ edges=rbind(d1, d2)
 
 # create a vertices data.frame. One line per object of our hierarchy
 vertices = data.frame(
-    name = unique(c(as.character(edges$from), as.character(edges$to))) , 
+    name = unique(c(as.character(edges$from), as.character(edges$to))) 
     #value = runif(111)
 ) 
 # Let's add a column with the group of each name. It will be useful later to color points
@@ -84,7 +84,7 @@ ggraph(mygraph, layout = 'dendrogram', circular = TRUE) +
     geom_edge_diagonal(colour="grey") +
     scale_edge_colour_distiller(palette = "RdPu") +
     geom_node_text(aes(x = x*1.15, y=y*1.15, filter = leaf, label=name, angle = vertices$angle, hjust= vertices$hjust, colour=vertices$group), size=2.7, alpha=1) +
-    geom_node_point(aes(filter = leaf, x = x*1.07, y=y*1.07, colour=group, size=value, alpha=0.2)) +
+    geom_node_point(aes(filter = leaf, x = x*1.07, y=y*1.07, colour=group, alpha=0.2)) +   #size = value
     scale_colour_manual(values= rep( brewer.pal(9,"Paired") , 30)) +
     scale_size_continuous( range = c(0.1,7) ) +
     theme_void() +
