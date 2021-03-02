@@ -64,7 +64,9 @@ What kind of insight can we gain from doing Text Analysis on the Thai Name and D
 - 2/24 - web scraping (Description)
 - 2/25 - data cleaning & transformation
 - 2/27 & 2/28 - figured out two dendrograms, normal and circular w/ geom_node_text readability
-- Shared visualization along with essay: [Thread 1]
+- Shared visualization along with essay:
+  [Thread 1](https://twitter.com/paulapivat/status/1365840992373379074?s=20)
+  [Thread 2](https://twitter.com/paulapivat/status/1366385027001380865?s=20)
 
 - (next step): finalize Circular Dendrogram for Shared Thai food; add annotations to sub-groups
 
