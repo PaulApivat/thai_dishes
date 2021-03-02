@@ -36,7 +36,7 @@ myleaves=which(is.na(match(vertices$name, edges$from)))
 nleaves=length(myleaves)
 vertices$id[myleaves] = seq(1:nleaves)
 
-vertices$angle = 360 / nleaves * vertices$id + 90    # Works the best
+vertices$angle = 360 / nleaves * vertices$id + 90    # Works the best, angles: 90 to 450
 
 # calculate the alignment of labels: right or left
 vertices$hjust<-ifelse( vertices$angle < 275, 1, 0)
