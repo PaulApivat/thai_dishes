@@ -75,7 +75,7 @@ vertices$hjust<-ifelse( vertices$angle < 271, 1, 0)
 vertices$angle<-ifelse(vertices$angle < 271, vertices$angle+180, vertices$angle)
 
 # Create a graph object
-mygraph <- graph_from_data_frame( edges, vertices=vertices )
+mygraph <- graph_from_data_frame(edges)
 
 
 # Make the plot
@@ -84,7 +84,7 @@ ggraph(mygraph, layout = 'dendrogram', circular = TRUE) +
     geom_edge_diagonal(colour="grey") +
     scale_edge_colour_distiller(palette = "RdPu") +
     geom_node_text(aes(x = x*1.15, y=y*1.15, filter = leaf, label=name, angle = vertices$angle, hjust= vertices$hjust, colour=vertices$group), size=2.7, alpha=1) +
-    geom_node_point(aes(filter = leaf, x = x*1.07, y=y*1.07, colour=group, alpha=0.2)) +   #size = value
+    geom_node_point(aes(filter = leaf, x = x*1.07, y=y*1.07, colour=vertices$group, alpha=0.2)) +   #size = value
     scale_colour_manual(values= rep( brewer.pal(9,"Paired") , 30)) +
     scale_size_continuous( range = c(0.1,7) ) +
     theme_void() +
