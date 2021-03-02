@@ -132,6 +132,8 @@ write_csv(df, "edit_thai_dishes.csv")
 # Dendrogram ----
 
 ### NOTE: read in edit_thai_dishes.csv
+df <- read_csv("edit_thai_dishes.csv")
+
 library(ggraph)
 library(igraph)
 
