@@ -10,13 +10,24 @@ People need to know they have other choices aside from Pad Thai. In fact Pad Tha
 
 This project is an opportunity to build a dataset of Thai dishes by scrapping tables off Wikipedia. The project is an opportunity to further Python and R skills. Using Python for web scrapping and R for exploratory analysis. Web scrapping is done in Beautiful Soup (`Python`) and pre-processed further with `dplyr` and visualized with `ggplot2`.
 
+This project will also be used to make an **open source** contribution (i.e., Circular Dendrogram with Rotating Text).
+
+In the second phase, I hope to learn Text Analysis to see what kind of insights I could gain from analyzing the Thai Name and Description of each dish.
+
 - What questions are you answering?
 
-Initially, how might we organized Thai dishes? What is the best way to organized the different dishes?
+Initially, the questions are exploratory:
+
+How might we organized Thai dishes?
+What is the best way to organized the different dishes?
+
+What kind of insight can we gain from doing Text Analysis on the Thai Name and Description of each dish?
 
 ## Initial Scope
 
 - Phase 1: Scrape the Thai Dishes table from [Wikipedia](https://en.wikipedia.org/wiki/List_of_Thai_dishes). Clean the data. Run exploratory analysis to get some insights. Use Python for web scraping, R for data wrangling and visualization.
+
+- Phase 1a: Make open source contribution to [R Graph Gallery](https://www.r-graph-gallery.com/index.html)
 
 - Next: Potentially use Text Analysis
 
@@ -53,6 +64,7 @@ Initially, how might we organized Thai dishes? What is the best way to organized
 - 2/24 - web scraping (Description)
 - 2/25 - data cleaning & transformation
 - 2/27 & 2/28 - figured out two dendrograms, normal and circular w/ geom_node_text readability
+- Shared visualization along with essay: [Thread 1]
 
 - (next step): finalize Circular Dendrogram for Shared Thai food; add annotations to sub-groups
 
@@ -98,8 +110,9 @@ After scraping data, I transformed them into data frames in _Pandas_ before port
 
 ## Visualizations
 
-- Dendrogram
-- Dendrogram (circular with geom_node_text rotating for maximum readability); major challenge figured out with help from
+- Dendrogram ([see](https://github.com/PaulApivat/thai_dishes/blob/main/png/indiv_thai_dishes.png))
+- Dendrogram (circular with geom_node_text rotating for maximum readability); major challenge figured out with help from [this article](https://atrebas.github.io/post/2019-06-08-lightweight-dendrograms/) ([see](https://github.com/PaulApivat/thai_dishes/blob/main/png/shared_dishes_final.png))
+-
 
 # Analysis
 
