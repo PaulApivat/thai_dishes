@@ -2,7 +2,6 @@
 library(ggraph)
 library(igraph)
 library(tidyverse)
-theme_set(theme_void())
 library(RColorBrewer) 
 
 
