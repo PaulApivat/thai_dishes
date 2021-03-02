@@ -5,40 +5,9 @@ library(tidyverse)
 theme_set(theme_void())
 library(RColorBrewer) 
 
-# data: edge list
-d1 <- data.frame(from="origin", to=paste("group", seq(1,7), sep=""))
-d2 <- data.frame(from=rep(d1$to, each=7), to=paste("subgroup", seq(1,49), sep="_"))
-edges <- rbind(d1, d2)
-
-# We can add a second data frame with information for each node!
-name <- unique(c(as.character(edges$from), as.character(edges$to)))
-vertices <- data.frame(
-    name=name,
-    group=c( rep(NA,8) ,  rep( paste("group", seq(1,7), sep=""), each=7)),
-    cluster=sample(letters[1:4], length(name), replace=T),
-    value=sample(seq(10,30), length(name), replace=T)
-)
-
-# Create a graph object
-mygraph <- graph_from_data_frame( edges, vertices=vertices)
-
-# linear plot
-ggraph(mygraph, layout = 'dendrogram', circular = FALSE) + 
-    geom_edge_diagonal() +
-    geom_node_text(aes( label=name, filter=leaf) , angle=0 , hjust=1, nudge_y = -0.01) +
-    ylim(-.4, NA) +
-    coord_flip()
-
-# circular plot
-# geom_node_text NEED REFORMATTING
-ggraph(mygraph, layout = 'dendrogram', circular = TRUE) + 
-    geom_edge_diagonal() +
-    geom_node_text(aes( label=name, filter=leaf) , angle=90 , hjust=1, nudge_y = -0.04) +
-    geom_node_point(aes(filter=leaf) , alpha=0.6)
-
 
 # CIRCULAR PLOT ----
-#set.seed(1)
+
 
 # create a data frame giving the hierarchical structure of your individuals
 d1=data.frame(from="origin", to=paste("group", seq(1,10), sep=""))
@@ -47,8 +16,8 @@ edges=rbind(d1, d2)
 
 # create a vertices data.frame. One line per object of our hierarchy
 vertices = data.frame(
-    name = unique(c(as.character(edges$from), as.character(edges$to))) 
-    #value = runif(111)
+    name = unique(c(as.character(edges$from), as.character(edges$to))), 
+    value = runif(111)
 ) 
 # Let's add a column with the group of each name. It will be useful later to color points
 vertices$group = edges$from[ match( vertices$name, edges$to ) ]
@@ -60,31 +29,33 @@ vertices$id=NA
 myleaves=which(is.na( match(vertices$name, edges$from) ))
 nleaves=length(myleaves)
 vertices$id[ myleaves ] = seq(1:nleaves)
-#vertices$angle= 90 - 360 * vertices$id / nleaves
-vertices$angle = 360 / nleaves * vertices$id + 90
+
+
+# Original: vertices$angle = 90 - 360 * vertices$id / nleaves
+# note: if last number is 90, the text is not straight
+vertices$angle = 360 / nleaves * vertices$id + 110
+
 
 # calculate the alignment of labels: right or left
-# If I am on the left part of the plot, my labels have currently an angle < -90
-#vertices$hjust<-ifelse( vertices$angle < -90, 1, 0)
 
+# Original: vertices$hjust<-ifelse( vertices$angle < -90, 1, 0)
 vertices$hjust<-ifelse( vertices$angle < 271, 1, 0)
 
 # flip angle BY to make them readable
-#vertices$angle<-ifelse(vertices$angle < -90, vertices$angle+180, vertices$angle)
 
+# Original: vertices$angle<-ifelse(vertices$angle < -90, vertices$angle+180, vertices$angle)
 vertices$angle<-ifelse(vertices$angle < 271, vertices$angle+180, vertices$angle)
 
 # Create a graph object
-mygraph <- graph_from_data_frame(edges)
+mygraph <- graph_from_data_frame(edges, vertices = vertices)
 
 
 # Make the plot
-#set.seed(1)
 ggraph(mygraph, layout = 'dendrogram', circular = TRUE) + 
     geom_edge_diagonal(colour="grey") +
     scale_edge_colour_distiller(palette = "RdPu") +
     geom_node_text(aes(x = x*1.15, y=y*1.15, filter = leaf, label=name, angle = vertices$angle, hjust= vertices$hjust, colour=vertices$group), size=2.7, alpha=1) +
-    geom_node_point(aes(filter = leaf, x = x*1.07, y=y*1.07, colour=vertices$group, alpha=0.2)) +   #size = value
+    geom_node_point(aes(filter = leaf, x = x*1.07, y=y*1.07, colour=vertices$group, size = vertices$value, alpha=0.2)) +   #size = value
     scale_colour_manual(values= rep( brewer.pal(9,"Paired") , 30)) +
     scale_size_continuous( range = c(0.1,7) ) +
     theme_void() +
@@ -92,7 +63,7 @@ ggraph(mygraph, layout = 'dendrogram', circular = TRUE) +
         legend.position="none",
         plot.margin=unit(c(0,0,0,0),"cm"),
     ) +
-    expand_limits(x = c(-1.3, 1.3), y = c(-1.3, 1.3))
-
+    expand_limits(x = c(-1.3, 1.3), y = c(-1.3, 1.3)) +
+    coord_flip()
 
 
