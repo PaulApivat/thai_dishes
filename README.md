@@ -68,14 +68,15 @@ What kind of insight can we gain from doing Text Analysis on the Thai Name and D
   [Thread 1](https://twitter.com/paulapivat/status/1365840992373379074?s=20)
   [Thread 2](https://twitter.com/paulapivat/status/1366385027001380865?s=20)
 
-- (next step): finalize Circular Dendrogram for Shared Thai food; add annotations to sub-groups
+- 3/1 Finalize Circular Dendrogram for Shared Thai food; add annotations to sub-groups
+
+- 3/2 Make first open source contribution
 
 - Explore potential to apply text analytics
-
 - Contribute to open source in 2 ways:
 
-1. contribute Thai_dishes to thai_food_open_data on github
-2. contribute Update to circular dendrogram for R Gallery
+1. contribute Update to circular dendrogram for R Gallery
+2. [potentially] contribute Thai_dishes to [thai_food_open_data on github](https://github.com/thangman22/thai-food-open-data) (requires additional data manipulation to categorize whether each dish contains rice, egg, meats, spicy, seafood, green, coconut-nut, coconut-milk, calories etc)
 
 # Getting Data
 
@@ -92,6 +93,8 @@ Tweaked web scraper article to scrape 16 tables from Wikipedia.com. We scraped o
 
 After discovering that the hyper-linked text in the Description column did not get scrapped, I created an empty column ('Description2'), then set it
 to a list comprehension where I looped through each row (a list) and joined the strings in each list. A by product is _not_ having to flatten the column of lists.
+
+Note: Also discovered missing words in the Thai_name column which suggests we need a tweak in how this column was scrapped in Python.
 
 ## Data Cleaning
 
