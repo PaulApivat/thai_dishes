@@ -3,8 +3,16 @@
 ## Motivation
 
 - What is this project?
-- What drives this project? People need to know they have other choices aside from Pad Thai.
+
+- What drives this project?
+
+People need to know they have other choices aside from Pad Thai. In fact Pad Thai is one of 53 individual dishes and there are at least 201 shared dishes in Thai cuisine.
+
+This project is an opportunity to build a dataset of Thai dishes by scrapping tables off Wikipedia. The project is an opportunity to further Python and R skills. Using Python for web scrapping and R for exploratory analysis. Web scrapping is done in Beautiful Soup (`Python`) and pre-processed further with `dplyr` and visualized with `ggplot2`.
+
 - What questions are you answering?
+
+Initially, how might we organized Thai dishes? What is the best way to organized the different dishes?
 
 ## Initial Scope
 
