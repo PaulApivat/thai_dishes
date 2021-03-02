@@ -31,19 +31,28 @@ vertices$id[ myleaves ] = seq(1:nleaves)
 
 
 # Original: vertices$angle = 90 - 360 * vertices$id / nleaves
-# note: if last number is 90, the text is not straight
+
+# NOTE: This line sets the angle of the text (geom_node_text)
+# The last number (110) adjusts the specific angle of each subgroup text
+
 vertices$angle = 360 / nleaves * vertices$id + 110
 
-
-# calculate the alignment of labels: right or left
-
 # Original: vertices$hjust<-ifelse( vertices$angle < -90, 1, 0)
-vertices$hjust<-ifelse( vertices$angle < 271, 1, 0)
 
-# flip angle BY to make them readable
+# calculate the alignment of labels
+# Left (subgroup_1 to subgroup_50), Right (subgroup_51 to subgroup_100)
+# angles and hjust must be consistent (110 & 291)
+# make hjust = 1 for subgroup_1 to subgroup_50
+# make hjust = 0 for subgroup_51 to subgroup_51
+
+vertices$hjust<-ifelse( vertices$angle < 291, 1, 0)
 
 # Original: vertices$angle<-ifelse(vertices$angle < -90, vertices$angle+180, vertices$angle)
-vertices$angle<-ifelse(vertices$angle < 271, vertices$angle+180, vertices$angle)
+
+# flip text to make them READABLE
+# When making hjust = 1 for subgroup_1 to subgroup_50, must ALSO add 180 degree to those angles to push out the geom_node_text labels
+
+vertices$angle<-ifelse(vertices$angle < 291, vertices$angle+180, vertices$angle)
 
 # Create a graph object
 mygraph <- graph_from_data_frame(edges, vertices = vertices)
