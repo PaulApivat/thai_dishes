@@ -70,7 +70,7 @@ What kind of insight can we gain from doing Text Analysis on the Thai Name and D
 
 - 3/1 Finalize Circular Dendrogram for Shared Thai food; add annotations to sub-groups
 
-- 3/2 Made first open source contribution. [See pull request here](https://github.com/holtzy/R-graph-gallery/pull/34).
+- 3/2 Made first open source contribution. [See pull request here](https://github.com/holtzy/R-graph-gallery/pull/34). [Thread 3](https://twitter.com/paulapivat/status/1366768527529533440?s=20)
 
 - Explore potential to apply text analytics
 - Contribute to open source in 2 ways:
@@ -109,7 +109,10 @@ After scraping data, I transformed them into data frames in _Pandas_ before port
 
 - save to "edit_thai_dishes.csv"
 
-- _note_: Discovered that hyper-linked text in the Description column did not get scrapped. Must redo. `Done`
+- _note_:
+
+1. Discovered that hyper-linked text in the Description column did not get scrapped. Must redo. `Done`
+2. Discovered that some text in the Thai_name column did not get propertly scrapped. Could redo (but already manually added missing words).
 
 # EDA
 
