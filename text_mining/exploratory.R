@@ -109,4 +109,18 @@ frequency <- bind_rows(mutate(tidy_bronte, author = "Brontë Sisters"),
     gather(author, proportion, `Brontë Sisters`:`H.G. Wells`)
 
 
+# frequency for Thai_dishes
+# need to include 'shared_dishes' as 'authors'
+thai_name_freq <- df %>%
+    #filter(major_grouping == 'Shared dishes') %>% # or Shared dishes
+    select(Thai_name, Thai_script, major_grouping) %>%
+    unnest_tokens(ngrams, Thai_name) %>% 
+    count(ngrams, major_grouping) %>%
+    group_by(major_grouping) %>%
+    mutate(proportion = n / sum(n)) %>%
+    select(-n) %>%
+    spread(major_grouping, proportion) %>%
+    gather(major_grouping, proportion, Drinks:`Shared dishes`) 
+
+
 
