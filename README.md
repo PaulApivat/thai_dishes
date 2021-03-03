@@ -10,7 +10,7 @@ People need to know they have other choices aside from Pad Thai. In fact Pad Tha
 
 This project is an opportunity to build a dataset of Thai dishes by scrapping tables off Wikipedia. The project is an opportunity to further Python and R skills. Using Python for web scrapping and R for exploratory analysis. Web scrapping is done in Beautiful Soup (`Python`) and pre-processed further with `dplyr` and visualized with `ggplot2`.
 
-This project will also be used to make an **open source** contribution (i.e., Circular Dendrogram with Rotating Text).
+This project also makes an **open source** contribution (i.e., Circular Dendrogram with Rotating Text), [see pull request here](https://github.com/holtzy/R-graph-gallery/pull/34).
 
 In the second phase, I hope to learn Text Analysis to see what kind of insights I could gain from analyzing the Thai Name and Description of each dish.
 
@@ -70,12 +70,12 @@ What kind of insight can we gain from doing Text Analysis on the Thai Name and D
 
 - 3/1 Finalize Circular Dendrogram for Shared Thai food; add annotations to sub-groups
 
-- 3/2 Make first open source contribution
+- 3/2 Made first open source contribution. [See pull request here](https://github.com/holtzy/R-graph-gallery/pull/34).
 
 - Explore potential to apply text analytics
 - Contribute to open source in 2 ways:
 
-1. contribute Update to circular dendrogram for R Gallery
+1. contribute Update to circular dendrogram for R Gallery. [see here](https://github.com/holtzy/R-graph-gallery/pull/34)
 2. [potentially] contribute Thai_dishes to [thai_food_open_data on github](https://github.com/thangman22/thai-food-open-data) (requires additional data manipulation to categorize whether each dish contains rice, egg, meats, spicy, seafood, green, coconut-nut, coconut-milk, calories etc)
 
 # Getting Data
@@ -117,7 +117,8 @@ After scraping data, I transformed them into data frames in _Pandas_ before port
 
 - Dendrogram ([see](https://github.com/PaulApivat/thai_dishes/blob/main/png/indiv_thai_dishes.png))
 - Dendrogram (circular with geom_node_text rotating for maximum readability); major challenge figured out with help from [this article](https://atrebas.github.io/post/2019-06-08-lightweight-dendrograms/) ([see](https://github.com/PaulApivat/thai_dishes/blob/main/png/shared_dishes_final.png))
--
+
+- Completed Dendrogram with working `geom_node_text` to improve Circular Dendrogram readability. This was submitted as a [pull request](https://github.com/holtzy/R-graph-gallery/pull/34) to contribute to the project.
 
 # Analysis
 
