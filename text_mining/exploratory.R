@@ -13,6 +13,7 @@ df %>%
     unnest_tokens(word, Thai_name) 
 
 # group by word and tally
+# filter by words that appear at least 10 times
 df %>%
     select(Thai_name, Thai_script) %>%
     # can substitute 'word' for ngrams, sentences, lines
@@ -20,11 +21,18 @@ df %>%
     # to reference thai spelling: group_by(Thai_script)
     group_by(ngrams) %>%  
     tally(sort = TRUE) %>%  # alt: count(sort = TRUE)
+    filter(n > 9) %>%
 # visualize
 # pipe directly into ggplot2, because using tidytools
-    ggplot(aes(n, ngrams)) + 
+    ggplot(aes(x = n, y = reorder(ngrams, n))) + 
     geom_col(aes(fill = ngrams)) +
-    theme(legend.position = "none")
+    theme(legend.position = "none") +
+    labs(
+        x = "Frequency",
+        y = "Words",
+        title = "Frequency of Words in Thai Cuisine",
+        subtitle = "Words appearing at least 10 times in Individual or Shared Dishes"
+    )
 
 # Join two tables
 # 1. has Thai_script
@@ -166,4 +174,12 @@ ggplot(thai_name_freq, aes(x = proportion, y = `Individual dishes`,
 # phat (stir-fry), nam (soup), mu (pork) are frequent ingredients used in both Individual & Shared Dishes
 # nuea (beef) and phrik (chilli) can also be found in both
 # There's more kaeng (curry) in shared dishes and khao (rice) in the names of individual dishes (makes sense)
+
+
+# We COULD quantify similarity and differences of sets of word frequencies IF we had more than one set
+# This would require looking at minor groupings; Compare Individual dishes across minor groupings
+# Then see if word frequencies in Individual Dishes are more correlated with Curries, Soups, Salads etc.
+
+
+
 
