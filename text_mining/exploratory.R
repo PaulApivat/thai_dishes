@@ -109,7 +109,7 @@ frequency <- bind_rows(mutate(tidy_bronte, author = "Brontë Sisters"),
     gather(author, proportion, `Brontë Sisters`:`H.G. Wells`)
 
 
-# NEXT STEP: plot Jane Austen
+# NEXT STEP: plot Jane Austen compared to Bronte Sisters & H.G. Wells
 install.packages('scales')
 library(scales)
 
@@ -133,16 +133,18 @@ ggplot(frequency, aes(x = proportion, y = `Jane Austen`,
 # frequency for Thai_dishes ----
 # need to include 'shared_dishes' as 'authors'
 thai_name_freq <- df %>%
-    #filter(major_grouping == 'Shared dishes') %>% # or Shared dishes
     select(Thai_name, Thai_script, major_grouping) %>%
     unnest_tokens(ngrams, Thai_name) %>% 
     count(ngrams, major_grouping) %>%
     group_by(major_grouping) %>%
     mutate(proportion = n / sum(n)) %>%
-    select(-n) %>%
+    select(major_grouping, ngrams, proportion) %>%
     spread(major_grouping, proportion) %>%
-    gather(major_grouping, proportion, Drinks:`Shared dishes`) 
+    gather(major_grouping, proportion, c(`Shared dishes`)) %>%
+    select(ngrams, `Individual dishes`, major_grouping, proportion)
 
-ggplot(thai_name_freq, aes(x = proportion, y = major_grouping),
-       color = abs(major_grouping))
+
+
+#ggplot(thai_name_freq, aes(x = proportion, y = major_grouping),
+#       color = abs(major_grouping))
 
