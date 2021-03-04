@@ -138,8 +138,9 @@ ggplot(frequency, aes(x = proportion, y = `Jane Austen`,
 
 
 
-# frequency for Thai_dishes ----
-# comparing Individual and Shared Dishes
+# frequency for Thai_dishes (Major Grouping) ----
+
+# comparing Individual and Shared Dishes (Major Grouping)
 thai_name_freq <- df %>%
     select(Thai_name, Thai_script, major_grouping) %>%
     unnest_tokens(ngrams, Thai_name) %>% 
@@ -179,6 +180,57 @@ ggplot(thai_name_freq, aes(x = proportion, y = `Individual dishes`,
 # We COULD quantify similarity and differences of sets of word frequencies IF we had more than one set
 # This would require looking at minor groupings; Compare Individual dishes across minor groupings
 # Then see if word frequencies in Individual Dishes are more correlated with Curries, Soups, Salads etc.
+
+# Frequency for Thai_dishes (Minor Grouping) ----
+
+
+# Rice Dishes compared to all other dishes
+
+thai_name_freq_2 <- df %>%
+    select(Thai_name, Thai_script, minor_grouping) %>%
+    unnest_tokens(ngrams, Thai_name) %>% 
+    count(ngrams, minor_grouping) %>%
+    group_by(minor_grouping) %>%
+    mutate(proportion = n / sum(n)) %>%
+    select(minor_grouping, ngrams, proportion) %>%
+    spread(minor_grouping, proportion) %>% 
+    gather(minor_grouping, proportion, c(`Noodle dishes`,
+                                         `Misc Indiv`,
+                                         `Curries`,
+                                         `Soups`,
+                                         `Salads`,
+                                         `Fried and stir-fried dishes`,
+                                         `Deep-fried dishes`,
+                                         `Grilled dishes`,
+                                         `Steamed or blanched dishes`,
+                                         `Stewed dishes`,
+                                         `Dipping sauces and pastes`,
+                                         `Misc Shared`))  %>%
+    select(ngrams, `Rice dishes`, minor_grouping, proportion)
+
+
+
+
+ggplot(thai_name_freq_2, aes(x = proportion, y = `Rice dishes`,
+                           color = abs(`Rice dishes` - proportion))) +
+    geom_abline(color = 'gray40', lty = 2) +
+    geom_jitter(alpha = 0.1, size = 2.5, width = 0.3, height = 0.3) +
+    geom_text(aes(label = ngrams), check_overlap = TRUE, vjust = 1.5) +
+    scale_x_log10(labels = percent_format()) +
+    scale_y_log10(labels = percent_format()) +
+    scale_color_gradient(limits = c(0, 0.001), 
+                         low = "darkslategray4", high = "gray75") +
+    facet_wrap(~minor_grouping) +
+    theme(legend.position = "none",
+          legend.text = element_text(angle = 45, hjust = 1)) +
+    labs(y = "Rice dishes",
+         x = NULL,
+         color = NULL,
+         title = "Comparing Word Frequencies",
+         subtitle = "Rice dishes compared to others")
+
+
+
 
 
 
