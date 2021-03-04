@@ -131,7 +131,7 @@ ggplot(frequency, aes(x = proportion, y = `Jane Austen`,
 
 
 # frequency for Thai_dishes ----
-# need to include 'shared_dishes' as 'authors'
+# comparing Individual and Shared Dishes
 thai_name_freq <- df %>%
     select(Thai_name, Thai_script, major_grouping) %>%
     unnest_tokens(ngrams, Thai_name) %>% 
@@ -144,7 +144,26 @@ thai_name_freq <- df %>%
     select(ngrams, `Individual dishes`, major_grouping, proportion)
 
 
+# Expect warming message about missing values
+ggplot(thai_name_freq, aes(x = proportion, y = `Individual dishes`,
+       color = abs(`Individual dishes` - proportion))) +
+    geom_abline(color = 'gray40', lty = 2) +
+    geom_jitter(alpha = 0.1, size = 2.5, width = 0.3, height = 0.3) +
+    geom_text(aes(label = ngrams), check_overlap = TRUE, vjust = 1.5) +
+    scale_x_log10(labels = percent_format()) +
+    scale_y_log10(labels = percent_format()) +
+    scale_color_gradient(limits = c(0, 0.001), 
+                         low = "darkslategray4", high = "gray75") +
+    theme(legend.position = "none",
+          legend.text = element_text(angle = 45, hjust = 1)) +
+    labs(y = "Individual Dishes",
+         x = "Shared Dishes",
+         color = NULL,
+         title = "Comparing word frequencies in the names Thai Dishes",
+         subtitle = "Individual and Shared Dishes")
 
-#ggplot(thai_name_freq, aes(x = proportion, y = major_grouping),
-#       color = abs(major_grouping))
+# NOTE: Words close to the line have similar frequency in both Individual & Shared Dishes
+# phat (stir-fry), nam (soup), mu (pork) are frequent ingredients used in both Individual & Shared Dishes
+# nuea (beef) and phrik (chilli) can also be found in both
+# There's more kaeng (curry) in shared dishes and khao (rice) in the names of individual dishes (makes sense)
 
