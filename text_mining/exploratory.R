@@ -229,6 +229,15 @@ ggplot(thai_name_freq_2, aes(x = proportion, y = `Rice dishes`,
          title = "Comparing Word Frequencies",
          subtitle = "Rice dishes compared to others")
 
+# (ch3) TF-IDF ----
+
+# TF-IDF is intended to measure how important a word is to a document
+# in a collection (corpus) of documents 
+# - one food grouping in a collection of groupings
+
+## NOTE: Better than just frequency + stop words
+
+
 
 
 
