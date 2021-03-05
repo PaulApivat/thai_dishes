@@ -125,7 +125,7 @@ lm(log10(`term frequency`) ~ log10(rank), data = rank_subset_thai)
 freq_by_rank_thai %>%
     ggplot(aes(x = rank, y = `term frequency`, color = minor_grouping)) +
     geom_abline(intercept = -0.94, slope = -0.63, color = 'gray50', linetype = 2) +
-    geom_line(size = 1.1, alpha = 0.8, show.legend = FALSE) +
+    geom_line(size = 1.1, alpha = 0.8, show.legend = TRUE) +
     scale_x_log10() +
     scale_y_log10() +
     theme(legend.position = 'bottom') +
