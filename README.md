@@ -136,6 +136,12 @@ Find word frequencies, observe zipf's law, compare word frequencies between docu
 
 This helps us understand that the most frequent raw material (mu - pork), is not necessarily the most important for each sub-grouping of Thai dishes.
 
+From the initial question of :
+
+> What kind of insight can we gain from doing Text Analysis on the Thai Name and Description of each dish?
+
+We can find out the most common raw materials/ingredients across dishes. Then, within sub-grouping we can find out what word is most important (among a list of Thai dish names).
+
 - use `unnest_tokens()` to manipulate words into one-per-row format
 - use [bar chart](https://github.com/PaulApivat/thai_dishes/blob/main/png/word_freq_barchart.png) to visualize frequency
 - use `geom_abline` and `geom_jitter` with `scale_x_log10` to re-scale both axes; Rice dishes compared to others in [word frequencies](https://github.com/PaulApivat/thai_dishes/blob/main/png/rice_word_freq_compare.png)
