@@ -2,6 +2,7 @@
 library(dplyr)
 library(readr)
 library(ggplot2)
+library(forcats)
 
 library(tidytext)
 library(janeaustenr)
@@ -48,6 +49,31 @@ rank_subset <- freq_by_rank %>%
            rank > 10)
 
 lm(log10(`term frequency`) ~ log10(rank), data = rank_subset)
+
+# The bind_tf_idf() function
+# Calculating tf-idf finds words that are important in a text, but not too common
+
+book_tf_idf <- book_words %>%
+    bind_tf_idf(word, book, n)
+
+# Terms with high tf-idf in Jane Austen's works
+book_tf_idf %>%
+    select(-total) %>%
+    arrange(desc(tf_idf))
+
+
+# Visualize High tf-idf words from Jane Austen's works
+book_tf_idf %>%
+    group_by(book) %>%
+    slice_max(tf_idf, n = 15) %>%
+    ungroup() %>%
+    ggplot(aes(tf_idf, fct_reorder(word, tf_idf), fill = book)) +
+    geom_col(show.legend = FALSE) +
+    facet_wrap(~book, ncol = 2, scales = "free") +
+    labs(x = "tf-idf", y = NULL)
+
+
+
 
 
 
@@ -134,6 +160,46 @@ freq_by_rank_thai %>%
         subtitle = "log-log coordinates"
     )
 
+
+# The bind_tf_idf() function ----
+
+thai_dish_tf_idf <- thai_dish_join %>%
+    bind_tf_idf(word, minor_grouping, n)
+
+# Terms with high tf-idf in Thai dishes 
+# Observation: even though mu is the most common term, the tf_idf doesn't consider it
+# important for each of the food groups
+# e.g., 'kaeng' is more important to Curries than 'mu' is to various dishes
+
+thai_dish_tf_idf %>%
+    select(-total) %>%
+    arrange(desc(tf_idf))
+
+# Visualize High tf-idf words in Thai Dishes
+thai_dish_tf_idf %>%
+    group_by(minor_grouping) %>%
+    slice_max(tf_idf, n = 5) %>%
+    ungroup() %>%
+    ggplot(aes(x = tf_idf, y = fct_reorder(word, tf_idf), fill = minor_grouping)) +
+    geom_col(show.legend = FALSE) +
+    facet_wrap(~minor_grouping, ncol = 3, scales = 'free') +
+    labs(
+        x = "tf-idf", 
+        y = NULL
+    )
+
+
+# SUMMARY ----
+
+# Using Term Frequency and Inverse Document Frequency allows us to 
+# find words that are characteristic for one document 
+# within a collection of documents (minor grouping of Thai dishes)
+
+# explore Frequency on it's own gives us insight into which ingredient
+# or raw material is used most frequently in a collection of Thai dishes
+
+# tf-idf from {tidytext} allows us to see which ingredients or raw materials
+# are important in a grouping within a collection of groupings
 
 
 
