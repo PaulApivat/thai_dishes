@@ -134,6 +134,8 @@ After scraping data, I transformed them into data frames in _Pandas_ before port
 Apply tidy principles to unstructured text to observe the one-token-per-row format using the {tidytext} package.
 Find word frequencies, observe zipf's law, compare word frequencies between documents, find `tf_idf`, visualize long tail distribution of word frequencies and a _facet_ bar chart comparing the most important words (using `tf_idf`).
 
+This helps us understand that the most frequent raw material (mu - pork), is not necessarily the most important for each sub-grouping of Thai dishes.
+
 - use `unnest_tokens()` to manipulate words into one-per-row format
 - use bar chart to visualize frequency
 - use `geom_abline` and `geom_jitter` with `scale_x_log10` to re-scale both axes
