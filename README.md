@@ -57,6 +57,8 @@ What kind of insight can we gain from doing Text Analysis on the Thai Name and D
 
 **Wikipedia: Thai Dishes**: https://en.wikipedia.org/wiki/List_of_Thai_dishes
 
+**Text Mining in R**: https://www.tidytextmining.com/
+
 # Documenting Progress
 
 - Project walk through
@@ -69,8 +71,10 @@ What kind of insight can we gain from doing Text Analysis on the Thai Name and D
   [Thread 2](https://twitter.com/paulapivat/status/1366385027001380865?s=20)
 
 - 3/1 Finalize Circular Dendrogram for Shared Thai food; add annotations to sub-groups
-
 - 3/2 Made first open source contribution. [See pull request here](https://github.com/holtzy/R-graph-gallery/pull/34). [Thread 3](https://twitter.com/paulapivat/status/1366768527529533440?s=20)
+
+- 3/4 - Use {tidytext} package, `unnest_tokens()` function to change unstructured text to one-token-per-row - find Word Frequencies using `dplyr`, use {janeaustenr} package, `dplyr` and `ggplot2`, Visualize comparison of Word Frequencies, Visualize Zipf's law
+- 3/5 - Analyze word and document frequency: `tf-idf`, term frequency, inverse document frequency, visualize Zipf's law, `bind_tf_idf()`, visualize td_idf across minor_grouping, long-tail distribution,
 
 - Explore potential to apply text analytics
 - Contribute to open source in 2 ways:
@@ -125,7 +129,17 @@ After scraping data, I transformed them into data frames in _Pandas_ before port
 
 # Analysis
 
-- TBD
+## Text Analysis
+
+Apply tidy principles to unstructured text to observe the one-token-per-row format using the {tidytext} package.
+Find word frequencies, observe zipf's law, compare word frequencies between documents, find `tf_idf`, visualize long tail distribution of word frequencies and a _facet_ bar chart comparing the most important words (using `tf_idf`).
+
+- use `unnest_tokens()` to manipulate words into one-per-row format
+- use bar chart to visualize frequency
+- use `geom_abline` and `geom_jitter` with `scale_x_log10` to re-scale both axes
+- visualize zipf's law
+- visualize tf_idf using facet bar charts in `ggplot2`.
+- Next: ngrams and correlation between words
 
 # Results
 
