@@ -3,6 +3,8 @@ library(readr)
 library(tidyr)
 library(tidytext)
 library(janeaustenr)
+library(igraph)
+library(ggraph)
 
 df <- read_csv("../web_scraping/edit_thai_dishes.csv")
 
@@ -78,14 +80,50 @@ thai_dish_bigrams %>%
 
 
 # Visualizing a network of Bi-grams with {ggraph} ----
+library(igraph)
+
+thai_dish_bigram_counts <- df %>%
+    select(Thai_name, minor_grouping) %>%
+    unnest_tokens(bigram, Thai_name, token = "ngrams", n = 2) %>%
+    separate(bigram, c("word1", "word2"), sep = " ") %>%
+    count(word1, word2, sort = TRUE)
 
 
+# filter for relatively common combinations (n > 2)
+thai_dish_bigram_graph <- thai_dish_bigram_counts %>%
+    filter(n > 2) %>%
+    graph_from_data_frame()
 
 
+library(ggraph)
+set.seed(2021)
 
+# ggraph is preferred for plotting (over igraph) because
+# it has consistent grammar of graphics (ggplot2)
+ggraph(thai_dish_bigram_graph, layout = "fr") +
+    geom_edge_link() +
+    geom_node_point() +
+    geom_node_text(aes(label = name), vjust = 1, hjust = 1) +
+    labs(
+        title = "{ggraph} Network of Relationship between words",
+        subtitle = "Common central nodes in Thai food",
+        caption = "Data: Wikipedia | Graphics: @paulapivat"
+    )
 
+# polishing operations to make a better looking graph
+a <- grid::arrow(type = "closed", length = unit(.15, "inches"))
 
-
+ggraph(thai_dish_bigram_graph, layout = "fr") +
+    geom_edge_link(aes(edge_alpha = n), show.legend = FALSE,
+                   arrow = a, end_cap = circle(.07, 'inches')) +
+    geom_node_point(color = "dodgerblue", size = 5, alpha = 0.7) +
+    geom_node_text(aes(label = name), vjust = 1, hjust = 1) +
+    labs(
+        title = "{ggraph} Network of Relationship between words",
+        subtitle = "Common central nodes in Thai food",
+        caption = "Data: Wikipedia | Graphics: @paulapivat"
+    ) +
+    theme_void()
 
 
 
