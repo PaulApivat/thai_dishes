@@ -197,6 +197,23 @@ salad_cors %>%
     facet_wrap(~item1, scales = "free") +
     coord_flip()
 
+# Visualize Correlations and Clusters of Words with ggraph
+set.seed(2021)
+salad_cors %>%
+    filter(correlation > .15) %>%
+    graph_from_data_frame() %>%
+    ggraph(layout = "fr") +
+    geom_edge_link(aes(edge_alpha = correlation), show.legend = FALSE) +
+    geom_node_point(color = "red", size = 5, alpha = 0.5) +
+    geom_node_text(aes(label = name), repel = TRUE) +
+    labs(
+        title = "{ggraph} Word Pairs in Thai Salads",
+        subtitle = "At least .15 correlation",
+        caption = "Data: Wikipedia | Graphics: @paulapivat"
+    ) +
+    theme_void()
+
+
 
 
 unique(df$minor_grouping)
