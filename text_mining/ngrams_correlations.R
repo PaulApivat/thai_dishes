@@ -6,6 +6,11 @@ library(janeaustenr)
 library(igraph)
 library(ggraph)
 
+install.packages('widyr')
+library(widyr)
+
+
+
 df <- read_csv("../web_scraping/edit_thai_dishes.csv")
 
 # Book Example (Jane Austen) ----
@@ -125,5 +130,73 @@ ggraph(thai_dish_bigram_graph, layout = "fr") +
     ) +
     theme_void()
 
+# Counting and Correlating within Minor Groupings (Thai Dishes) with widyr ----
+
+# We could divide Thai_dishes into "sections"
+# what words tend to appear within the Salad section?
+thai_salad_words <- df %>%
+    select(minor_grouping, Thai_name) %>%
+    filter(minor_grouping == 'Salads') %>%
+    mutate(section = row_number() %/% 10) %>%
+    filter(section > 0) %>%
+    unnest_tokens(word, Thai_name) # no stop words
+    
+
+library(widyr)
+
+# count words co-occuring within Salad Dishes
+salad_word_pairs <- thai_salad_words %>%
+    pairwise_count(word, section, sort = TRUE)
+
+# We can see the most common pair is "som" + "nam"
+# Let's find words that most often occur with "som"
+
+salad_word_pairs %>%
+    filter(item1 == "som")
+
+salad_word_pairs %>%
+    filter(item1 == "nam")
+
+# Pairwise Correlation ----
+
+# most co-occuring words may not be meaningful since they're also the most common individual words
+# examine correlation among words
+
+salad_cors <- thai_salad_words %>%
+    group_by(word) %>%
+    filter(n() >= 2) %>%
+    pairwise_cor(word, section, sort = TRUE) 
+
+# Explore: Words most correlated with a word like 'yang'
+salad_cors %>%
+    filter(item1 == "yang")
+
+# Pick particular words to find other words most associated with them
+# try "pla" (fish) and "nuea" (meat)
+salad_cors %>%
+    filter(item1 %in% c("pla", "nuea")) %>%
+    group_by(item1) %>%
+    top_n(6) %>%
+    ungroup() %>%
+    mutate(item2 = reorder(item2, correlation)) %>%
+    ggplot(aes(x = item2, y = correlation)) +
+    geom_bar(stat = "identity") +
+    facet_wrap(~item1, scales = "free") +
+    coord_flip()
 
 
+# try "pla" (fish) and "nuea" (meat)
+salad_cors %>%
+    filter(item1 %in% c("som", "yang")) %>%
+    group_by(item1) %>%
+    top_n(6) %>%
+    ungroup() %>%
+    mutate(item2 = reorder(item2, correlation)) %>%
+    ggplot(aes(x = item2, y = correlation)) +
+    geom_bar(stat = "identity") +
+    facet_wrap(~item1, scales = "free") +
+    coord_flip()
+
+
+
+unique(df$minor_grouping)
