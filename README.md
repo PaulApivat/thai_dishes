@@ -77,8 +77,9 @@ Initially, the questions are exploratory:
 - 3/4 - Use {tidytext} package, `unnest_tokens()` function to change unstructured text to one-token-per-row - find Word Frequencies using `dplyr`, use {janeaustenr} package, `dplyr` and `ggplot2`, Visualize comparison of Word Frequencies, Visualize Zipf's law
 - 3/5 - Analyze word and document frequency: `tf-idf`, term frequency, inverse document frequency, visualize Zipf's law, `bind_tf_idf()`, visualize td_idf across minor_grouping, long-tail distribution,
 
-- Explore potential to apply text analytics
-- Contribute to open source in 2 ways:
+- 3/6 - Explore `bi-grams` and networks of relationship between words in {tidytext}
+
+Contribute to open source in 2 ways:
 
 1. contribute Update to circular dendrogram for R Gallery. [see here](https://github.com/holtzy/R-graph-gallery/pull/34)
 2. [potentially] contribute Thai_dishes to [thai_food_open_data on github](https://github.com/thangman22/thai-food-open-data) (requires additional data manipulation to categorize whether each dish contains rice, egg, meats, spicy, seafood, green, coconut-nut, coconut-milk, calories etc)
@@ -127,6 +128,14 @@ After scraping data, I transformed them into data frames in _Pandas_ before port
 - Dendrogram (circular with geom_node_text rotating for maximum readability); major challenge figured out with help from [this article](https://atrebas.github.io/post/2019-06-08-lightweight-dendrograms/) ([see](https://github.com/PaulApivat/thai_dishes/blob/main/png/shared_dishes_final.png))
 
 - Completed Dendrogram with working `geom_node_text` to improve Circular Dendrogram readability. This was submitted as a [pull request](https://github.com/holtzy/R-graph-gallery/pull/34) to contribute to the project.
+
+#### Text Mining Visualizations
+
+- [Word Frequency](https://github.com/PaulApivat/thai_dishes/blob/main/png/word_freq_barchart.png)
+- [Work Frequency comparison between Individual & Shared dishes](https://github.com/PaulApivat/thai_dishes/blob/main/png/word_freq_indiv_shared_dishes.png)
+- Facet wrap of `td_idf` for Thai dishes [sub-grouping](https://github.com/PaulApivat/thai_dishes/blob/main/png/high_td_idf_thai_dishes.png)
+- [Network of Thai dish names](https://github.com/PaulApivat/thai_dishes/blob/main/png/network_thai_ingredients.png)
+- [Network within Thai Salad](https://github.com/PaulApivat/thai_dishes/blob/main/png/thai_salad_correlation.png)
 
 # Analysis
 
