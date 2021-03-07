@@ -12,16 +12,17 @@ This project is an opportunity to build a dataset of Thai dishes by scrapping ta
 
 This project also makes an **open source** contribution (i.e., Circular Dendrogram with Rotating Text), [see pull request here](https://github.com/holtzy/R-graph-gallery/pull/34).
 
-In the second phase, I hope to learn Text Analysis to see what kind of insights I could gain from analyzing the Thai Name and Description of each dish.
+In the second phase, we take a quick dive into (exploratory) Text Mining see what kind of insights could be gained from analyzing Thai Names (and Description) for each dish.
 
 - What questions are you answering?
 
 Initially, the questions are exploratory:
 
-How might we organized Thai dishes?
-What is the best way to organized the different dishes?
-
-What kind of insight can we gain from doing Text Analysis on the Thai Name and Description of each dish?
+1. How might we organized Thai dishes?
+2. What is the best way to organized the different dishes?
+3. Which raw material(s) are most popular?
+4. Which raw materials are most important?
+5. Could you learn about Thai food just from the names of the dishes?
 
 ## Initial Scope
 
@@ -29,7 +30,7 @@ What kind of insight can we gain from doing Text Analysis on the Thai Name and D
 
 - Phase 1a: Make open source contribution to [R Graph Gallery](https://www.r-graph-gallery.com/index.html)
 
-- Next: Potentially use Text Analysis
+- Phase 2: Explored basic [Text Mining with R](https://www.tidytextmining.com/index.html)
 
 # Code and Libraries Used
 
@@ -151,7 +152,7 @@ We can find out the most common raw materials/ingredients across dishes. Then, w
 - separate `bi-grams` into two words, filter for certain words (e.g., "khao") to see what is most often paired with that word, then `group_by` and `count`
 - rank bi-grams by `tf-idf`
 - visualize network of bi-grams using `igraph` and `ggraph`, `graph_from_data_frame()`
-- can target specific sub-groups to visualize networks
+- can target specific sub-groups to visualize networks (i.e., Thai salads)
 
 # Results
 
