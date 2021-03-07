@@ -165,6 +165,29 @@ We can find out the most common raw materials/ingredients across dishes. Then, w
 
 # Results
 
-- TBD
+This project has primarily been exploratory. Here are some interesting hypotheses for further testing:
+
+1. The top five words in Individual Dishes will be different from Shared Dishes.
+2. The most central raw material for Individual Dishes will be different from Shared Dishes.
+3. Shared dishes will feature more curries, soups and salads.
+4. Individual dishes will feature more rice or noodles.
+
+We found pork ("mu") to be the most common word, but the most important word varies by dish type.
+The most highly correlated word-pairs are: "khao" + "phat", "nam" + "phrik" and "mu" + "korp".
+
+### Potential Next Steps
+
+Thai Dish Project
+
+1. Re-evaluate web-scrapping to ensure minimal missing data
+2. Make web-scrapping code more DRY
+3. Find way to convert data.frame to dictionary data structure with ingredients for each dish (potential open source contribution)
+
+Twitter Text Mining
+
+1. Extend Text Mining learning for Twitter case;
+2. Revisit Sentiment Analysis in Python, apply to Twitter data
+3. Compare Sentiment Analysis in Python vs {tidytext} in R
+4. Go through end-to-end Text Mining in R vs Python for Twitter data
 
 ## Presentation / Productionization
