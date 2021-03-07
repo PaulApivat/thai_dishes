@@ -191,3 +191,5 @@ Twitter Text Mining
 4. Go through end-to-end Text Mining in R vs Python for Twitter data
 
 ## Presentation / Productionization
+
+Next step: Create Blog Series with this Project
