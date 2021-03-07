@@ -147,7 +147,11 @@ We can find out the most common raw materials/ingredients across dishes. Then, w
 - use `geom_abline` and `geom_jitter` with `scale_x_log10` to re-scale both axes; Rice dishes compared to others in [word frequencies](https://github.com/PaulApivat/thai_dishes/blob/main/png/rice_word_freq_compare.png)
 - visualize [zipf's law](https://github.com/PaulApivat/thai_dishes/blob/main/png/zipf_thai_dishes.png)
 - visualize tf_idf using [facet bar charts](https://github.com/PaulApivat/thai_dishes/blob/main/png/high_td_idf_thai_dishes.png) in `ggplot2`.
-- Next: ngrams and correlation between words
+- use `unnest_tokens()` to identify `bi-grams` (token = "ngrams", n = 2) between words
+- separate `bi-grams` into two words, filter for certain words (e.g., "khao") to see what is most often paired with that word, then `group_by` and `count`
+- rank bi-grams by `tf-idf`
+- visualize network of bi-grams using `igraph` and `ggraph`, `graph_from_data_frame()`
+- can target specific sub-groups to visualize networks
 
 # Results
 
