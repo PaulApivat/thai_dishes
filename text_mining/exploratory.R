@@ -1,6 +1,7 @@
 library(tidyverse)
 install.packages("tidytext")
 library(tidytext)
+library(scales)
 
 
 # read in data from another directory (web_scraping)
@@ -14,6 +15,8 @@ df %>%
 
 # group by word and tally
 # filter by words that appear at least 10 times
+# Thai color palette: https://colorpalette.org/dish-vegetable-vegetarian-food-color-palette/
+
 df %>%
     select(Thai_name, Thai_script) %>%
     # can substitute 'word' for ngrams, sentences, lines
@@ -26,12 +29,38 @@ df %>%
 # pipe directly into ggplot2, because using tidytools
     ggplot(aes(x = n, y = reorder(ngrams, n))) + 
     geom_col(aes(fill = ngrams)) +
+    scale_fill_manual(values = c(
+        "#c3d66b",
+        "#70290a",
+        "#2f1c0b",
+        "#ba9d8f",
+        "#dda37b",
+        "#8f5e23",
+        "#96b224",
+        "#dbcac9",
+        "#626817",
+        "#a67e5f",
+        "#be7825",
+        "#446206",
+        "#c8910b",
+        "#88821b",
+        "#313d5f",
+        "#73869a",
+        "#6f370f",
+        "#c0580d",
+        "#e0d639",
+        "#c9d0ce",
+        "#ebf1f0",
+        "#50607b"
+    )) +
+    theme_minimal() +
     theme(legend.position = "none") +
     labs(
         x = "Frequency",
         y = "Words",
         title = "Frequency of Words in Thai Cuisine",
-        subtitle = "Words appearing at least 10 times in Individual or Shared Dishes"
+        subtitle = "Words appearing at least 10 times in Individual or Shared Dishes",
+        caption = "Data: Wikipedia | Graphic: @paulapivat"
     )
 
 # Join two tables
@@ -161,15 +190,17 @@ ggplot(thai_name_freq, aes(x = proportion, y = `Individual dishes`,
     geom_text(aes(label = ngrams), check_overlap = TRUE, vjust = 1.5) +
     scale_x_log10(labels = percent_format()) +
     scale_y_log10(labels = percent_format()) +
-    scale_color_gradient(limits = c(0, 0.001), 
-                         low = "darkslategray4", high = "gray75") +
+    scale_color_gradient(limits = c(0, 0.01), 
+                         low = "red", high = "blue") +    # low = "darkslategray4", high = "gray75"
+    theme_minimal() +
     theme(legend.position = "none",
           legend.text = element_text(angle = 45, hjust = 1)) +
     labs(y = "Individual Dishes",
          x = "Shared Dishes",
          color = NULL,
-         title = "Comparing word frequencies in the names Thai Dishes",
-         subtitle = "Individual and Shared Dishes")
+         title = "Comparing Word Frequencies in the names Thai Dishes",
+         subtitle = "Individual and Shared Dishes",
+         caption = "Data: Wikipedia | Graphics: @paulapivat")
 
 # NOTE: Words close to the line have similar frequency in both Individual & Shared Dishes
 # phat (stir-fry), nam (soup), mu (pork) are frequent ingredients used in both Individual & Shared Dishes
@@ -218,16 +249,18 @@ ggplot(thai_name_freq_2, aes(x = proportion, y = `Rice dishes`,
     geom_text(aes(label = ngrams), check_overlap = TRUE, vjust = 1.5) +
     scale_x_log10(labels = percent_format()) +
     scale_y_log10(labels = percent_format()) +
-    scale_color_gradient(limits = c(0, 0.001), 
-                         low = "darkslategray4", high = "gray75") +
+    scale_color_gradient(limits = c(0, 0.01), 
+                         low = "red", high = "blue") +   #low = "darkslategray4", high = "gray75"
     facet_wrap(~minor_grouping) +
+    theme_minimal() +
     theme(legend.position = "none",
           legend.text = element_text(angle = 45, hjust = 1)) +
     labs(y = "Rice dishes",
          x = NULL,
          color = NULL,
          title = "Comparing Word Frequencies",
-         subtitle = "Rice dishes compared to others")
+         subtitle = "Rice dishes compared to others",
+         caption = "Data: Wikipedia | Graphics: @paulapivat")
 
 # (ch3) TF-IDF ----
 
