@@ -118,14 +118,15 @@ ggraph(thai_dish_bigram_graph, layout = "fr") +
 # polishing operations to make a better looking graph
 a <- grid::arrow(type = "closed", length = unit(.15, "inches"))
 
+set.seed(2021)
 ggraph(thai_dish_bigram_graph, layout = "fr") +
     geom_edge_link(aes(edge_alpha = n), show.legend = FALSE,
                    arrow = a, end_cap = circle(.07, 'inches')) +
     geom_node_point(color = "dodgerblue", size = 5, alpha = 0.7) +
     geom_node_text(aes(label = name), vjust = 1, hjust = 1) +
     labs(
-        title = "{ggraph} Network of Relationship between words",
-        subtitle = "Common central nodes in Thai food",
+        title = "Network of Relations between Word Pairs",
+        subtitle = "{ggraph}: common nodes in Thai food",
         caption = "Data: Wikipedia | Graphics: @paulapivat"
     ) +
     theme_void()
@@ -141,7 +142,6 @@ thai_salad_words <- df %>%
     filter(section > 0) %>%
     unnest_tokens(word, Thai_name) # no stop words
     
-
 library(widyr)
 
 # count words co-occuring within Salad Dishes
@@ -207,13 +207,110 @@ salad_cors %>%
     geom_node_point(color = "red", size = 5, alpha = 0.5) +
     geom_node_text(aes(label = name), repel = TRUE) +
     labs(
-        title = "{ggraph} Word Pairs in Thai Salads",
-        subtitle = "At least .15 correlation",
+        title = "Word Pairs in Thai Salads",
+        subtitle = "{ggraph}: at least r = 0.15 correlation",
         caption = "Data: Wikipedia | Graphics: @paulapivat"
     ) +
     theme_void()
 
 
-
-
 unique(df$minor_grouping)
+
+# Curries, Counting & Correlation ----
+
+# We could divide Thai_dishes into "sections"
+# what words tend to appear within the Curries section?
+thai_curries_words <- df %>%
+    select(minor_grouping, Thai_name) %>%
+    filter(minor_grouping == 'Curries') %>%
+    mutate(section = row_number() %/% 10) %>%
+    filter(section > 0) %>%
+    unnest_tokens(word, Thai_name) # no stop words
+
+# Curries correlation
+# most co-occuring words may not be meaningful since they're also the most common individual words
+# examine correlation among words
+
+curries_cors <- thai_curries_words %>%
+    group_by(word) %>% 
+    filter(n() >= 2) %>%     # looking for co-occuring words, so must be 2 or greater
+    pairwise_cor(word, section, sort = TRUE) 
+
+# Visualize Correlations and Clusters of Words with ggraph
+set.seed(2021)
+curries_cors %>%
+    filter(correlation != 0) %>%
+    graph_from_data_frame() %>%
+    ggraph(layout = "fr") +
+    geom_edge_link(aes(edge_alpha = correlation, size = correlation), show.legend = TRUE) +
+    geom_node_point(color = "blue", size = 5, alpha = 0.5) +
+    geom_node_text(aes(label = name), repel = TRUE) +
+    labs(
+        title = "Word Pairs in Thai Curries",
+        subtitle = "{ggraph}: moderate to strong correlations only",
+        caption = "Data: Wikipedia | Graphics: @paulapivat"
+    ) +
+    theme_void()
+
+
+# Correlation Individual vs Shared Dishes ----
+
+# Individual Dishes
+individual_dish_words <- df %>%
+    select(major_grouping, Thai_name) %>%
+    filter(major_grouping == 'Individual dishes') %>%
+    mutate(section = row_number() %/% 10) %>%
+    filter(section > 0) %>%
+    unnest_tokens(word, Thai_name)  # assume no stop words
+
+individual_dish_cors <- individual_dish_words %>%
+    group_by(word) %>% 
+    filter(n() >= 2) %>%     # looking for co-occuring words, so must be 2 or greater
+    pairwise_cor(word, section, sort = TRUE) 
+
+
+set.seed(2021)
+individual_dish_cors %>%
+    filter(correlation < -0.40) %>%
+    graph_from_data_frame() %>%
+    ggraph(layout = "fr") +
+    geom_edge_link(aes(edge_alpha = correlation, size = correlation), show.legend = TRUE) +
+    geom_node_point(color = "green", size = 5, alpha = 0.5) +
+    geom_node_text(aes(label = name), repel = TRUE) +
+    labs(
+        title = "Word Pairs in Individual Dishes",
+        subtitle = "{ggraph}: Negatively correlated (r = -0.4)",
+        caption = "Data: Wikipedia | Graphics: @paulapivat"
+    ) +
+    theme_void()
+
+
+# SHARED DISHES
+shared_dish_words <- df %>%
+    select(major_grouping, Thai_name) %>%
+    filter(major_grouping == 'Shared dishes') %>%
+    mutate(section = row_number() %/% 10) %>%
+    filter(section > 0) %>%
+    unnest_tokens(word, Thai_name)  # assume no stop words
+
+
+shared_dish_cors <- shared_dish_words %>%
+    group_by(word) %>% 
+    filter(n() >= 2) %>%     # looking for co-occuring words, so must be 2 or greater
+    pairwise_cor(word, section, sort = TRUE) 
+
+
+set.seed(2021)
+shared_dish_cors %>%
+    filter(correlation > 0.50) %>%
+    graph_from_data_frame() %>%
+    ggraph(layout = "fr") +
+    geom_edge_link(aes(edge_alpha = correlation, size = correlation), show.legend = TRUE) +
+    geom_node_point(color = "purple", size = 5, alpha = 0.5) +
+    geom_node_text(aes(label = name), repel = TRUE) +
+    labs(
+        title = "Word Pairs in Shared Dishes",
+        subtitle = "{ggraph}: at least r = 0.50 correlation",
+        caption = "Data: Wikipedia | Graphics: @paulapivat"
+    ) +
+    theme_void()
