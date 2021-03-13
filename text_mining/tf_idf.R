@@ -131,10 +131,16 @@ freq_by_rank_thai %>%
     geom_line(size = 1.1, alpha = 0.8, show.legend = TRUE) +
     scale_x_log10() +
     scale_y_log10() +
-    theme(legend.position = 'bottom') +
+    theme_minimal() +
+    theme(
+        legend.position = 'bottom',
+        ) +
     labs(
         title = "Zipf's Law for Thai Dishes",
-        subtitle = "log-log coordinates"
+        subtitle = "Log10 for each coordinate",
+        y = "Term Frequency",
+        x = "Rank",
+        color = "Minor Grouping"
         )
 
 
@@ -154,10 +160,15 @@ freq_by_rank_thai %>%
     geom_line(size = 1.1, alpha = 0.8, show.legend = TRUE) +
     scale_x_log10() +
     scale_y_log10() +
+    theme_minimal() +
     theme(legend.position = 'bottom') +
     labs(
         title = "Zipf's Law for Thai Dishes",
-        subtitle = "log-log coordinates"
+        subtitle = "Log10 for each coordinate",
+        y = "Term Frequency",
+        x = "Rank",
+        color = "Minor Grouping",
+        caption = "Data: Wikipedia | Graphic: @paulapivat"
     )
 
 
@@ -176,6 +187,8 @@ thai_dish_tf_idf %>%
     arrange(desc(tf_idf))
 
 # Visualize High tf-idf words in Thai Dishes
+# Thai Dish Color Palette source: https://colorpalette.org/color-ideas/thai-food/
+
 thai_dish_tf_idf %>%
     group_by(minor_grouping) %>%
     slice_max(tf_idf, n = 5) %>%
@@ -183,9 +196,31 @@ thai_dish_tf_idf %>%
     ggplot(aes(x = tf_idf, y = fct_reorder(word, tf_idf), fill = minor_grouping)) +
     geom_col(show.legend = FALSE) +
     facet_wrap(~minor_grouping, ncol = 3, scales = 'free') +
+    theme_minimal() +
+    scale_fill_manual(values = c(
+        "#c3d66b",
+        "#70290a",
+        "#2f1c0b",
+        "#ba9d8f",
+        "#dda37b",
+        "#8f5e23",
+        "#96b224",
+        "#dbcac9",
+        "#626817",
+        "#a67e5f",
+        "#be7825",
+        "#446206",
+        "#c8910b",
+        "#88821b",
+        "#313d5f",
+        "#73869a"
+    )) +
     labs(
-        x = "tf-idf", 
-        y = NULL
+        x = NULL, 
+        y = NULL,
+        title = "Term Frequency - Inverse Document Frequency",
+        subtitle = "Across 254 Individual & Shared Dishes",
+        caption = "Data: Wikipedia | Graphic: @paulapivat"
     )
 
 
