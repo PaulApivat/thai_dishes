@@ -1,5 +1,7 @@
 # Thai Dishes: Project Overview
 
+Note: [Post Published](https://towardsdatascience.com/exploring-thai-food-with-data-fae0193851be) in Towards Data Science
+
 ## Motivation
 
 - What is this project?
