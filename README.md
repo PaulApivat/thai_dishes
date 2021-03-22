@@ -179,8 +179,8 @@ The most highly correlated word-pairs are: "khao" + "phat", "nam" + "phrik" and 
 
 Thai Dish Project
 
-1. Re-evaluate web-scrapping to ensure minimal missing data
-2. Make web-scrapping code more DRY
+1. [Done] ~~Re-evaluate web-scrapping to ensure minimal missing data
+2. [Done] ~~Make web-scrapping code more DRY
 3. Find way to convert data.frame to dictionary data structure with ingredients for each dish (potential open source contribution)
 
 Twitter Text Mining
@@ -192,4 +192,4 @@ Twitter Text Mining
 
 ## Presentation / Productionization
 
-Next step: Create Blog Series with this Project
+[Post Published](https://towardsdatascience.com/exploring-thai-food-with-data-fae0193851be) in Towards Data Science
